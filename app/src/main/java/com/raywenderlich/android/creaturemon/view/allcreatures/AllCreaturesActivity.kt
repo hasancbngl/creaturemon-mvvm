@@ -2,23 +2,25 @@ package com.raywenderlich.android.creaturemon.view.allcreatures
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.raywenderlich.android.creaturemon.R
 import com.raywenderlich.android.creaturemon.view.creature.CreatureActivity
 import kotlinx.android.synthetic.main.activity_all_creatures.*
-import kotlinx.android.synthetic.main.content_all_creatures.*
 
 class AllCreaturesActivity : AppCompatActivity() {
 
   private val adapter = CreatureAdapter(mutableListOf())
+  private lateinit var creaturesRecyclerView:RecyclerView
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_all_creatures)
     setSupportActionBar(toolbar)
+    creaturesRecyclerView = findViewById(R.id.creaturesRecyclerView)
 
     creaturesRecyclerView.layoutManager = LinearLayoutManager(this)
     creaturesRecyclerView.adapter = adapter

@@ -30,8 +30,8 @@
 
 package com.raywenderlich.android.creaturemon.model.room
 
-import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
+import androidx.lifecycle.LiveData
 import com.raywenderlich.android.creaturemon.app.CreaturemonApplication
 import com.raywenderlich.android.creaturemon.model.Creature
 import com.raywenderlich.android.creaturemon.model.CreatureRepository
