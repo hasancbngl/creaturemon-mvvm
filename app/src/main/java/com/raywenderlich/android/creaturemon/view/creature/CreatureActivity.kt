@@ -40,6 +40,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.raywenderlich.android.creaturemon.R
 import com.raywenderlich.android.creaturemon.model.AttributeStore
+import com.raywenderlich.android.creaturemon.model.AttributeType
 import com.raywenderlich.android.creaturemon.model.AttributeValue
 import com.raywenderlich.android.creaturemon.model.Avatar
 import com.raywenderlich.android.creaturemon.view.avatars.AvatarAdapter
@@ -83,21 +84,21 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
     private fun configureSpinnerListeners() {
         intelligence.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                // TODO: handle selection
+                viewModel.attributeSelected(AttributeType.INTELLIGENCE, position)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
         strength.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                // TODO: handle selection
+                viewModel.attributeSelected(AttributeType.STRENGTH, position)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
         endurance.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                // TODO: handle selection
+                viewModel.attributeSelected(AttributeType.ENDURANCE, position)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
