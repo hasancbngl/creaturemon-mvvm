@@ -21,7 +21,7 @@ class CreatureGeneratorTest {
                 endurance = 10
         )
         val name = "Pikachu"
-        val expectedCreature = Creature(attributes, 77, name)
+        val expectedCreature = Creature(attributes, 84, name)
 
         assertEquals(expectedCreature, creatureGenerator.generateCreature(attributes, name))
     }

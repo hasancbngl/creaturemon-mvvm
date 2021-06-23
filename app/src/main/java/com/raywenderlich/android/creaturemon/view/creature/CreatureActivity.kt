@@ -37,6 +37,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.raywenderlich.android.creaturemon.R
 import com.raywenderlich.android.creaturemon.model.AttributeStore
@@ -64,12 +65,13 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
         configureSpinnerListeners()
         configureEditText()
         configureClickListeners()
+        configureLiveDataObservers()
     }
 
     private fun configureUI() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = getString(R.string.add_creature)
-        // TODO: hide label
+        if (viewModel.drawable != 0) hideTapLabel()
     }
 
     private fun configureSpinnerAdapters() {
@@ -105,12 +107,22 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
         }
     }
 
+    private fun configureLiveDataObservers() {
+        viewModel.getCreatureLiveData().observe(this, Observer { creature ->
+            creature?.let {
+                hitPoints.text = creature.hintPoints.toString()
+                avatarImageView.setImageResource(creature.drawable)
+                nameEditText.setText(creature.name)
+            }
+        })
+    }
+
     private fun configureEditText() {
         nameEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // TODO: handle text changed
+                viewModel.name = s.toString()
             }
         })
     }
@@ -123,11 +135,12 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
 
         saveButton.setOnClickListener {
             // TODO: handle save button clicked
+            viewModel.updateCreature()
         }
     }
 
     override fun avatarClicked(avatar: Avatar) {
-        // TODO: handle avatar clicked
+        viewModel.drawableSelected(avatar.drawable)
         hideTapLabel()
     }
 
