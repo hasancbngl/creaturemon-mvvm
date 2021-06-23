@@ -4,6 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.raywenderlich.android.creaturemon.model.Creature
 import com.raywenderlich.android.creaturemon.model.CreatureAttributes
 import com.raywenderlich.android.creaturemon.model.CreatureGenerator
+import com.raywenderlich.android.creaturemon.model.CreatureRepository
+import com.raywenderlich.android.creaturemon.model.room.RoomRepository
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -22,10 +24,13 @@ class CreatureViewModelTest {
     @Mock
     lateinit var mockGenerator: CreatureGenerator
 
+    @Mock
+    lateinit var repository: CreatureRepository
+
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        creatureViewModel = CreatureViewModel(mockGenerator)
+        creatureViewModel = CreatureViewModel(mockGenerator, repository)
     }
 
     @Test
@@ -42,5 +47,18 @@ class CreatureViewModelTest {
         creatureViewModel.updateCreature()
 
         assertEquals(stubCreature, creatureViewModel.creature)
+    }
+
+    //test for creature with blank attributes can not be saved
+    @Test
+    fun cantSaveCreatureWithBlankName() {
+        creatureViewModel.intelligence = 10
+        creatureViewModel.strength = 3
+        creatureViewModel.endurance = 7
+        creatureViewModel.drawable = 1
+        creatureViewModel.name = ""
+        val canSaveCreature = creatureViewModel.canSaveCreature()
+
+        assertEquals(false, canSaveCreature)
     }
 }
