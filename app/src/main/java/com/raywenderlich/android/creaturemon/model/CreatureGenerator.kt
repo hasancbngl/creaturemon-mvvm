@@ -9,7 +9,7 @@ class CreatureGenerator {
                 4 * attributes.endurance +
                 3 * attributes.strength
 
-        return Creature(attributes, hitPoints, name, 0)
+        return Creature(attributes, hitPoints, name, drawable)
     }
 
 }
