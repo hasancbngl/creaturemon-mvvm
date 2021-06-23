@@ -148,7 +148,7 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
 
     override fun avatarClicked(avatar: Avatar) {
         viewModel.drawableSelected(avatar.drawable)
-        Log.i(TAG, "avatarClicked: ${avatar.drawable}" )
+        Log.i(TAG, "avatarClicked: ${avatar.drawable}")
         hideTapLabel()
     }
 

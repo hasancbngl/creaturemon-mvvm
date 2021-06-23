@@ -44,41 +44,41 @@ import com.raywenderlich.android.creaturemon.model.Avatar
 import kotlinx.android.synthetic.main.activity_creature.*
 
 class AvatarAdapter(private val avatars: List<Avatar>, private val listener: AvatarListener)
-  : RecyclerView.Adapter<AvatarAdapter.ViewHolder>() {
+    : RecyclerView.Adapter<AvatarAdapter.ViewHolder>() {
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-    return ViewHolder(parent.inflate(R.layout.list_item_avatar))
-  }
-
-  override fun getItemCount() = avatars.size
-
-  override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.bind(avatars[position])
-  }
-
-  inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-
-    private lateinit var avatar: Avatar
-    private val TAG = "AvatarAdapter"
-
-    private val imageView = itemView.findViewById<ImageView>(R.id.avatar)
-
-    init {
-      itemView.setOnClickListener(this)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(parent.inflate(R.layout.list_item_avatar))
     }
 
-    fun bind(avatar: Avatar) {
-      this.avatar = avatar
-      imageView.setImageResource(avatar.drawable)
-      Log.i(TAG, "bind: ${avatar.drawable}" )
+    override fun getItemCount() = avatars.size
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(avatars[position])
     }
 
-    override fun onClick(view: View) {
-      listener.avatarClicked(this.avatar)
-    }
-  }
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
-  interface AvatarListener {
-    fun avatarClicked(avatar: Avatar)
-  }
+        private lateinit var avatar: Avatar
+        private val TAG = "AvatarAdapter"
+
+        private val imageView = itemView.findViewById<ImageView>(R.id.avatar)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        fun bind(avatar: Avatar) {
+            this.avatar = avatar
+            imageView.setImageResource(avatar.drawable)
+            Log.i(TAG, "bind: ${avatar.drawable}")
+        }
+
+        override fun onClick(view: View) {
+            listener.avatarClicked(this.avatar)
+        }
+    }
+
+    interface AvatarListener {
+        fun avatarClicked(avatar: Avatar)
+    }
 }
