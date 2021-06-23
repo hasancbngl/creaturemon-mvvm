@@ -31,6 +31,7 @@
 package com.raywenderlich.android.creaturemon.model.room
 
 import android.os.AsyncTask
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.raywenderlich.android.creaturemon.app.CreaturemonApplication
 import com.raywenderlich.android.creaturemon.model.Creature
@@ -59,6 +60,7 @@ class RoomRepository : CreatureRepository {
 
     private class InsertAsyncTask internal constructor(private val dao: CreatureDao) : AsyncTask<Creature, Void, Void>() {
         override fun doInBackground(vararg params: Creature): Void? {
+            Log.i("h", "doInBackground: ${params[0].drawable}")
             dao.insert(params[0])
             return null
         }

@@ -31,15 +31,17 @@
 package com.raywenderlich.android.creaturemon.view.avatars
 
 import android.annotation.SuppressLint
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
+import android.content.ContentValues.TAG
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.raywenderlich.android.creaturemon.R
 import com.raywenderlich.android.creaturemon.app.inflate
 import com.raywenderlich.android.creaturemon.model.Avatar
+import kotlinx.android.synthetic.main.activity_creature.*
 
 class AvatarAdapter(private val avatars: List<Avatar>, private val listener: AvatarListener)
   : RecyclerView.Adapter<AvatarAdapter.ViewHolder>() {
@@ -57,6 +59,7 @@ class AvatarAdapter(private val avatars: List<Avatar>, private val listener: Ava
   inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
     private lateinit var avatar: Avatar
+    private val TAG = "AvatarAdapter"
 
     private val imageView = itemView.findViewById<ImageView>(R.id.avatar)
 
@@ -64,11 +67,10 @@ class AvatarAdapter(private val avatars: List<Avatar>, private val listener: Ava
       itemView.setOnClickListener(this)
     }
 
-    @SuppressLint("SetTextI18n")
     fun bind(avatar: Avatar) {
       this.avatar = avatar
-      val bitmap = BitmapFactory.decodeResource(imageView.context.resources, avatar.drawable)
-      imageView.setImageDrawable(BitmapDrawable(imageView.context.resources, bitmap))
+      imageView.setImageResource(avatar.drawable)
+      Log.i(TAG, "bind: ${avatar.drawable}" )
     }
 
     override fun onClick(view: View) {

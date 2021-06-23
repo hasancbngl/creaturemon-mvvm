@@ -33,6 +33,7 @@ package com.raywenderlich.android.creaturemon.view.creature
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -54,6 +55,7 @@ import kotlinx.android.synthetic.main.activity_creature.*
 class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
 
     private lateinit var viewModel: CreatureViewModel
+    private val TAG = "CreatureActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,6 +148,7 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
 
     override fun avatarClicked(avatar: Avatar) {
         viewModel.drawableSelected(avatar.drawable)
+        Log.i(TAG, "avatarClicked: ${avatar.drawable}" )
         hideTapLabel()
     }
 

@@ -32,10 +32,13 @@ package com.raywenderlich.android.creaturemon.view.allcreatures
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.raywenderlich.android.creaturemon.R
 import com.raywenderlich.android.creaturemon.app.inflate
 import com.raywenderlich.android.creaturemon.model.Creature
+import kotlinx.android.synthetic.main.list_item_creature.view.*
 
 class CreatureAdapter(private val creatures: MutableList<Creature>)
   : RecyclerView.Adapter<CreatureAdapter.ViewHolder>() {
@@ -62,7 +65,9 @@ class CreatureAdapter(private val creatures: MutableList<Creature>)
 
     fun bind(creature: Creature) {
       this.creature = creature
-      // TODO: populate views
+      itemView.avatarListItem.setImageResource(creature.drawable)
+      itemView.name.text = creature.name
+      itemView.hitPoints.text = creature.hintPoints.toString()
     }
   }
 }

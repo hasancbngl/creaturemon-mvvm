@@ -5,7 +5,6 @@ import com.raywenderlich.android.creaturemon.model.Creature
 import com.raywenderlich.android.creaturemon.model.CreatureAttributes
 import com.raywenderlich.android.creaturemon.model.CreatureGenerator
 import com.raywenderlich.android.creaturemon.model.CreatureRepository
-import com.raywenderlich.android.creaturemon.model.room.RoomRepository
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -44,7 +43,7 @@ class CreatureViewModelTest {
         creatureViewModel.strength = 3
         creatureViewModel.endurance = 7
 
-        creatureViewModel.updateCreature()
+        creatureViewModel.updateCreature(drawable)
 
         assertEquals(stubCreature, creatureViewModel.creature)
     }
@@ -58,6 +57,18 @@ class CreatureViewModelTest {
         creatureViewModel.drawable = 1
         creatureViewModel.name = ""
         val canSaveCreature = creatureViewModel.canSaveCreature()
+
+        assertEquals(false, canSaveCreature)
+    }
+
+    @Test
+    fun cantSaveWithoutStrength() {
+        creatureViewModel.intelligence = 10
+        creatureViewModel.endurance = 7
+        creatureViewModel.strength = 0
+        creatureViewModel.drawable = 1
+        creatureViewModel.name = "my Creature"
+        val  canSaveCreature = creatureViewModel.canSaveCreature()
 
         assertEquals(false, canSaveCreature)
     }
